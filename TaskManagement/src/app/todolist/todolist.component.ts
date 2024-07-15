@@ -17,17 +17,24 @@ import { selectAllTasks } from '../state/selectors/task.selectors';
 })
 export class TodolistComponent {
   todoForm: FormGroup;
-  tasks: { name: string, completed: boolean }[] = [];
+  tasks: {  title: string,
+    description: string,
+    dueDate: Date
+    completed: boolean }[] = [];
 
   constructor(private fb: FormBuilder) {
     this.todoForm = this.fb.group({
-      taskName: ['', Validators.required]
+      title: ['', Validators.required],
+      description: ['', Validators.required],
+      dueDate: ['', Validators.required]
     });
   }
 
   addTask(): void {
     if (this.todoForm.valid) {
-      this.tasks.push({ name: this.todoForm.value.taskName, completed: false });
+      this.tasks.push({title: this.todoForm.value.title,
+        description: this.todoForm.value.description,
+        dueDate: new Date(this.todoForm.value.dueDate), completed: false });
       this.todoForm.reset();
     }
   }

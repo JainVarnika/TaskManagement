@@ -1,14 +1,24 @@
 <div class="todolist-container">
     <form [formGroup]="todoForm" (ngSubmit)="addTask()">
-      <label for="taskName">Task:</label>
-      <input id="taskName" formControlName="taskName">
+      <label for="title">Title:</label>
+      <input id="title" formControlName="title">
+      
+      <label for="description">Description:</label>
+      <textarea id="description" formControlName="description"></textarea>
+  
+      <label for="dueDate">Due Date:</label>
+      <input type="date" id="dueDate" formControlName="dueDate">
       <button type="submit" [disabled]="todoForm.invalid">Add Task</button>
     </form>
   
     <ul>
       <li *ngFor="let task of tasks; let i = index">
         <input type="checkbox" [checked]="task.completed" (change)="toggleTaskCompletion(i)">
-        <span [class.completed]="task.completed">{{ task.name }}</span>
+        <div [class.completed]="task.completed">
+          <strong>{{ task.title }}</strong>
+          <p>{{ task.description }}</p>
+          <p>Due: {{ task.dueDate | date }}</p>
+        </div>
         <button (click)="deleteTask(i)">Delete</button>
       </li>
     </ul>
