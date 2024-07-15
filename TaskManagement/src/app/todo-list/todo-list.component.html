@@ -11,11 +11,16 @@
             <div *ngFor="let todo of allTodos$ | async" id="todo-item" cdkDrag>
                     <img src="assets/img/drag_icon.svg" id="dragBar" class="dragBar" cdkDragHandle>
                     <li> {{ todo.task }} </li>
-                    
+                    <!-- <input *ngIf="todo.editing" type="text" [(ngModel)]="todo.task">
+                <button id="editTodo" class="editTodo" (click)="editTask(todo)">
+                    {{ todo.editing ? 'Save' : 'Edit' }}
+                </button> -->
+                <button (click)="editTask(todo)">Edit</button>
                     <button id="deleteTodo" class="deleteTodo" (click)="removeTodo(todo.id)">✔</button>
             </div>
             <!-- <p *ngIf="todos.length <= 0" id="noTodosText">Add a new Todo by entering a task and hitting <strong>ENTER</strong> or the <strong>+</strong> button above!</p> -->
         </ul>
+        
     </div>
     <div class="divider"  *ngIf="todos.length > 0"></div>
 </div>

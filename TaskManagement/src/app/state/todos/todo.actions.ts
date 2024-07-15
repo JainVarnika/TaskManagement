@@ -24,3 +24,7 @@ export const moveTodo = createAction(
     "[Todo Page] Move Todo",
     props<{ prevIndex: number, newIndex: number }>()
 );
+export const editTodo = createAction(
+    "[Todo Page] Edit Todo",
+    props<{ id: string, updatedTask: string }>()
+);
