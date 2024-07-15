@@ -32,13 +32,15 @@ export class TodoListComponent implements OnInit, OnDestroy {
   }
 
   addTodo() {
-    if (this.inputField === ''|| this.descriptionField === '' || !this.dueDateField || !this.priorityField) {
+    if (this.inputField === ''|| this.descriptionField === ''  || !this.priorityField) {
       alert("Task, Description, Due Date, and Priority are required.");
       return;
     }
     const task = this.inputField;
     const description = this.descriptionField;
-    const dueDate = this.dueDateField.toISOString();
+    // const dueDate = this.dueDateField ? this.dueDateField.toISOString() : '';
+    // const dueDate = this.dueDateField instanceof Date ? this.dueDateField.toISOString() : '';
+    const dueDate = this.dueDateField; 
     const priority = this.priorityField;
 
     this.store.dispatch(addTodo({ task, description, dueDate, priority }));
@@ -64,37 +66,6 @@ export class TodoListComponent implements OnInit, OnDestroy {
     }
   }
  
-  // exportToCSV(): void {
-  //   const todos = this.todos.map(todo => ({
-  //     id: todo.id,
-  //     task: todo.task,
-  //     description: todo.description,
-  //     dueDate: new Date(todo.dueDate).toISOString(),
-  //     priority: todo.priority,
-  //     done: todo.done.toString() // Convert boolean to string
-  //   }));
-  
-  //   const csv = this.papa.unparse({
-  //     fields: ['ID', 'Task', 'Description', 'Due Date', 'Priority', 'Done'],
-  //     data: todos.map(todo => [
-  //       todo.id,
-  //       todo.task,
-  //       todo.description,
-  //       todo.dueDate,
-  //       todo.priority,
-  //       todo.done
-  //     ])
-  //   });
-  
-  //   const blob = new Blob([csv], { type: 'text/csv' });
-  //   const url = window.URL.createObjectURL(blob);
-  //   const a = document.createElement('a');
-  //   a.href = url;
-  //   a.download = 'todos.csv';
-  //   a.click();
-  //   window.URL.revokeObjectURL(url);
-  //   console.log("worked");
-  // }
   
   exportToCSV(): void {
     const todos = this.todos.map(todo => ({
