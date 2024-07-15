@@ -14,6 +14,9 @@ import { selectAllTodos } from '../state/todos/todo.selectors';
 })
 export class TodoListComponent implements OnInit, OnDestroy {
   inputField: string = '';
+  descriptionField: string = '';
+  dueDateField: Date |null= null;
+  priorityField: 'low' | 'medium' | 'high' |null = null;
   allTodos$ = this.store.select(selectAllTodos);
   todos: Todo[] = [];
   todoSub: any;
@@ -27,12 +30,20 @@ export class TodoListComponent implements OnInit, OnDestroy {
   }
 
   addTodo() {
-    if (this.inputField === '') {
+    if (this.inputField === ''|| this.descriptionField === '' || !this.dueDateField || !this.priorityField) {
+      alert("Task, Description, Due Date, and Priority are required.");
       return;
     }
+    const task = this.inputField;
+    const description = this.descriptionField;
+    const dueDate = this.dueDateField;
+    const priority = this.priorityField;
 
-    this.store.dispatch(addTodo({ task: this.inputField }));
+    this.store.dispatch(addTodo({ task, description, dueDate, priority }));
     this.inputField = '';
+    this.descriptionField = '';
+    this.dueDateField = null;
+    this.priorityField = null;
   }
 
   removeTodo(id: string) {
@@ -43,18 +54,7 @@ export class TodoListComponent implements OnInit, OnDestroy {
     moveItemInArray(this.todos, event.previousIndex, event.currentIndex);
     this.store.dispatch(moveTodo({prevIndex: event.previousIndex, newIndex: event.currentIndex}))
   }
-  // editTask(id: string, updatedTask: string) {
-  //   this.store.dispatch(editTodo({ id, updatedTask }));
-  // }
-  // editTask(todo: Todo): void {
-  //   const updatedTask = prompt("Edit Todo:", todo.task);
-  //   if (updatedTask !== null) {
-  //     this.updateTodoTask(todo.id, updatedTask);
-  //   }
-  // }
-  // updateTodoTask(id: string, updatedTask: string): void {
-  //   this.todos = this.TodoService.updateTodoTask(id, updatedTask);
-  // }
+  
   editTask(todo: Todo): void {
     const updatedTask = prompt("Edit Todo:", todo.task);
     if (updatedTask !== null) {

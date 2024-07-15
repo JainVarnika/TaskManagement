@@ -4,7 +4,7 @@ import { identifierName } from "@angular/compiler";
 import { discardPeriodicTasks } from "@angular/core/testing";
 import { createReducer, on } from "@ngrx/store";
 import { Todo } from "../../services/todo-list.service";
-import { addTodo, loadTodos, loadTodosSuccess, moveTodo, removeTodo,editTodo } from "./todo.actions";
+import { addTodo, loadTodos, loadTodosSuccess, moveTodo, removeTodo } from "./todo.actions";
 
 
 export interface TodoState {
@@ -21,20 +21,14 @@ export const initialState: TodoState = {
 
 export const todoReducer = createReducer(
     initialState,
-    on(addTodo, ( state, { task }) => ({
+    on(addTodo, (state, { task, description, dueDate, priority }) => ({
         ...state,
-        todos: [...state.todos, { id: Date.now().toString(), task: task, done: false }]
+        todos: [...state.todos, { id: Date.now().toString(), task, description, dueDate, priority, done: false }]
     })),
 
     on(removeTodo, (state, { id }) => ({
         ...state,
         todos: state.todos.filter((todo) => todo.id !== id),
-    })),
-    on(editTodo, (state, { id, updatedTask }) => ({
-        ...state,
-        todos: state.todos.map(todo =>
-            todo.id === id ? { ...todo, task: updatedTask } : todo
-        )
     })),
 
     on(loadTodos, (state) => ({ ...state, status: "loading" })),

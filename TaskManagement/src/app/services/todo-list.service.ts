@@ -2,8 +2,12 @@ import { Injectable } from '@angular/core';
 export interface Todo {
     id: string;
     task: string;
+    description: string;
+    dueDate: Date;
+    priority: 'low' | 'medium' | 'high';
     done: boolean;
     editing?: boolean; 
+    
 }
 @Injectable({ providedIn: 'root' })
 export class TodoService {
