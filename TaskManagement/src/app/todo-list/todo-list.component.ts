@@ -6,6 +6,8 @@ import { Todo ,TodoService} from '../services/todo-list.service';
 import { AppState } from '../state/app.state';
 import { addTodo, loadTodos, moveTodo, removeTodo, editTodo } from '../state/todos/todo.actions';
 import { selectAllTodos } from '../state/todos/todo.selectors';
+import { Papa } from 'ngx-papaparse';
+
 
 @Component({
   selector: 'app-todo-list',
@@ -21,7 +23,7 @@ export class TodoListComponent implements OnInit, OnDestroy {
   todos: Todo[] = [];
   todoSub: any;
 
-  constructor(private store: Store<AppState>, private TodoService: TodoService) {}
+  constructor(private store: Store<AppState>, private TodoService: TodoService , private papa: Papa) {}
 
 
   ngOnInit(): void {
@@ -36,14 +38,14 @@ export class TodoListComponent implements OnInit, OnDestroy {
     }
     const task = this.inputField;
     const description = this.descriptionField;
-    const dueDate = this.dueDateField;
+    const dueDate = this.dueDateField.toISOString();
     const priority = this.priorityField;
 
     this.store.dispatch(addTodo({ task, description, dueDate, priority }));
     this.inputField = '';
     this.descriptionField = '';
     this.dueDateField = null;
-    this.priorityField = null;
+    this.priorityField = 'low';
   }
 
   removeTodo(id: string) {
@@ -61,6 +63,70 @@ export class TodoListComponent implements OnInit, OnDestroy {
       this.store.dispatch(editTodo({ id: todo.id, updatedTask: updatedTask }));
     }
   }
+ 
+  // exportToCSV(): void {
+  //   const todos = this.todos.map(todo => ({
+  //     id: todo.id,
+  //     task: todo.task,
+  //     description: todo.description,
+  //     dueDate: new Date(todo.dueDate).toISOString(),
+  //     priority: todo.priority,
+  //     done: todo.done.toString() // Convert boolean to string
+  //   }));
+  
+  //   const csv = this.papa.unparse({
+  //     fields: ['ID', 'Task', 'Description', 'Due Date', 'Priority', 'Done'],
+  //     data: todos.map(todo => [
+  //       todo.id,
+  //       todo.task,
+  //       todo.description,
+  //       todo.dueDate,
+  //       todo.priority,
+  //       todo.done
+  //     ])
+  //   });
+  
+  //   const blob = new Blob([csv], { type: 'text/csv' });
+  //   const url = window.URL.createObjectURL(blob);
+  //   const a = document.createElement('a');
+  //   a.href = url;
+  //   a.download = 'todos.csv';
+  //   a.click();
+  //   window.URL.revokeObjectURL(url);
+  //   console.log("worked");
+  // }
+  
+  exportToCSV(): void {
+    const todos = this.todos.map(todo => ({
+      id: todo.id,
+      task: todo.task,
+      description: todo.description,
+      dueDate: todo.dueDate ? new Date(todo.dueDate).toISOString() : '', // Handle null or undefined dueDate
+      priority: todo.priority,
+      done: todo.done.toString() // Convert boolean to string
+    }));
+  
+    const csv = this.papa.unparse({
+      fields: ['ID', 'Task', 'Description', 'Due Date', 'Priority', 'Done'],
+      data: todos.map(todo => [
+        todo.id,
+        todo.task,
+        todo.description,
+        todo.dueDate,
+        todo.priority,
+        todo.done
+      ])
+    });
+  
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'todos.csv';
+    a.click();
+    window.URL.revokeObjectURL(url);
+  }
+  
   ngOnDestroy(): void {
     this.todoSub.unsubscribe();
   }

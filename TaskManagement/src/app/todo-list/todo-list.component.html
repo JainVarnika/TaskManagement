@@ -1,4 +1,4 @@
-<h1 id="headline">TO DO:</h1>
+<h1 id="headline">TASK MANAGEMENT SYSTEM</h1>
 
 <div id="list-container">
     <div id="list-head">
@@ -21,10 +21,13 @@
                     
                 <button (click)="editTask(todo)">Edit</button>
                     <button id="deleteTodo" class="deleteTodo" (click)="removeTodo(todo.id)">✔</button>
+                    
             </div>
             
         </ul>
         
     </div>
+
+    <button (click)="exportToCSV()" id="export-todo">Export to CSV</button>
     <div class="divider"  *ngIf="todos.length > 0"></div>
 </div>
