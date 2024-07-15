@@ -7,7 +7,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { AppComponent } from './app.component';
 import { TodolistComponent } from './todolist/todolist.component';
-import { taskReducer } from './state/reducers/task.reducer';
+// import { taskReducer } from './state/reducers/task.reducer';
 
 @NgModule({
   declarations: [
@@ -17,7 +17,7 @@ import { taskReducer } from './state/reducers/task.reducer';
   imports: [
     BrowserModule,
     ReactiveFormsModule,
-    StoreModule.forRoot({ tasks: taskReducer }),
+    // StoreModule.forRoot({ tasks: taskReducer }),
     // StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
   ],
   providers: [],
