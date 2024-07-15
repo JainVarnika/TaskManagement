@@ -1,0 +1,21 @@
+<h1 id="headline">TO DO:</h1>
+
+<div id="list-container">
+    <div id="list-head">
+        <input id="todo-input" type="text" placeholder="New Todo..." [(ngModel)]="inputField" (keydown.enter)="addTodo()">
+        <button (click)="addTodo()" id="add-todo">+</button>
+    </div>
+    <div class="divider"></div>
+    <div id="list-body">
+        <ul cdkDropList (cdkDropListDropped)="drop($event)">
+            <div *ngFor="let todo of allTodos$ | async" id="todo-item" cdkDrag>
+                    <img src="assets/img/drag_icon.svg" id="dragBar" class="dragBar" cdkDragHandle>
+                    <li> {{ todo.task }} </li>
+                    
+                    <button id="deleteTodo" class="deleteTodo" (click)="removeTodo(todo.id)">✔</button>
+            </div>
+            <!-- <p *ngIf="todos.length <= 0" id="noTodosText">Add a new Todo by entering a task and hitting <strong>ENTER</strong> or the <strong>+</strong> button above!</p> -->
+        </ul>
+    </div>
+    <div class="divider"  *ngIf="todos.length > 0"></div>
+</div>
