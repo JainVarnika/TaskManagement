@@ -51,9 +51,7 @@ export class TodoListComponent implements OnInit, OnDestroy {
     this.priorityField = 'low';
     this.taskstatusField='pending';
   }
-  // updateTaskStatus(todo: Todo) {
-  //   this.TodoService.updateTodoStatus(todo.id, todo.taskstatus);
-  // }
+
   updateTaskStatus(id: string, status: 'pending' | 'inProgress' | 'completed' | null) {
     this.TodoService.updateTodoStatus(id, status);
     this.todos = this.TodoService.getTodos();
@@ -106,7 +104,14 @@ export class TodoListComponent implements OnInit, OnDestroy {
     a.click();
     window.URL.revokeObjectURL(url);
   }
-  
+  sortTodosByDueDate() {
+    this.todos.sort((a, b) => {
+      if (!a.dueDate) return 1;
+      if (!b.dueDate) return -1;
+      console.log("working");
+      return new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime();
+    });
+  }
   ngOnDestroy(): void {
     this.todoSub.unsubscribe();
   }

@@ -32,7 +32,7 @@
         </ul>
         
     </div>
-
+    <button (click)="sortTodosByDueDate()" id="sort-todo">Sort by Due Date</button>
     <button (click)="exportToCSV()" id="export-todo">Export to CSV</button>
     <div class="divider"  *ngIf="todos.length > 0"></div>
 </div>
