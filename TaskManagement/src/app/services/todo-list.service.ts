@@ -5,6 +5,7 @@ export interface Todo {
     description: string;
     dueDate: Date | null;
     priority: 'low' | 'medium' | 'high';
+    taskstatus:'pending'|'inProgress' |'completed'|null;
     done: boolean;
     editing?: boolean; 
     
@@ -34,4 +35,15 @@ export class TodoService {
     this.saveTodos(todos);
     // return todos;
   }
+  updateTodoStatus(id: string, status: 'pending' | 'inProgress' | 'completed' | null): void {
+    let todos = this.getTodos();
+    todos = todos.map(todo => {
+        if (todo.id === id) {
+            return { ...todo, taskstatus: status };
+        } else {
+            return todo;
+        }
+    });
+    this.saveTodos(todos);
+}
 }

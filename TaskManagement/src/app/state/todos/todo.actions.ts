@@ -3,7 +3,7 @@ import { Todo } from "../../services/todo-list.service";
 
 export const addTodo = createAction(
     "[Todo Page] Add Todo",
-    props<{ task: string ;description: string; dueDate: Date|null; priority: 'low' | 'medium' | 'high'}>()
+    props<{ task: string ;description: string; dueDate: Date|null; priority: 'low' | 'medium' | 'high';  taskstatus:'pending'|'inProgress' |'completed'|null}>()
 );
 
 export const removeTodo = createAction(

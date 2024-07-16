@@ -59,23 +59,134 @@
        url('./assets/fonts/roboto/roboto-v30-latin-700italic.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
        url('./assets/fonts/roboto/roboto-v30-latin-700italic.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
+.poppins-thin {
+  font-family: "Poppins", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+}
+
+.poppins-extralight {
+  font-family: "Poppins", sans-serif;
+  font-weight: 200;
+  font-style: normal;
+}
+
+.poppins-light {
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.poppins-regular {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.poppins-medium {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.poppins-semibold {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.poppins-bold {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.poppins-extrabold {
+  font-family: "Poppins", sans-serif;
+  font-weight: 800;
+  font-style: normal;
+}
+
+.poppins-black {
+  font-family: "Poppins", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+}
+
+.poppins-thin-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 100;
+  font-style: italic;
+}
+
+.poppins-extralight-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 200;
+  font-style: italic;
+}
+
+.poppins-light-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.poppins-regular-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.poppins-medium-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.poppins-semibold-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-style: italic;
+}
+
+.poppins-bold-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.poppins-extrabold-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 800;
+  font-style: italic;
+}
+
+.poppins-black-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 900;
+  font-style: italic;
+}
 
 
 html, body, app-root{
   height: 100%;
   margin: 0;
-  font-family: "Roboto", sans-serif
+  font-family: "Roboto", sans-serif;
+  color: black;
+  
 }
 
 body{
-background: #D44D52;
-background: -webkit-linear-gradient(top left, #D44D52, #274E97);
-background: -moz-linear-gradient(top left, #D44D52, #274E97);
-background: linear-gradient(to bottom right, #D44D52, #274E97);
+// background: #D44D52;
+// background: -webkit-linear-gradient(top left, #D44D52, #274E97);
+// background: -moz-linear-gradient(top left, #D44D52, #274E97);
+// background: linear-gradient(to bottom right, #D44D52, #274E97);
+background: rgb(162, 190, 235);
 }
 
 button{
   border: none;
+  color: black;
   font-size: 1.4rem;
   font-weight: bold;
   text-align: center;
@@ -90,34 +201,6 @@ button:hover{
   cursor: pointer;
 }
 
-/* ---------------------------------------------------------- 
-            ~ Styles for drag and drop preview ~
-   ----------------------------------------------------------
-*/
-
-.cdk-drag-placeholder{
-  opacity: 0;
-}
-
-.cdk-drag-preview{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: rgba(255, 255, 255, 0.33);
-  font-size: 1.8rem;
-  border-radius: .5rem;
-  border: 1px solid rgba(255,255,255,0.4);
-  border-right: 1px solid rgba(255,255,255,0.2);
-  border-bottom: 1px solid rgba(255,255,255,0.2);
-  box-shadow: #00000030 0px 0px 4px 1px;
-  list-style: none;
-  backdrop-filter: blur(10px);
-}
-
-.dragBar{
-  height: 2rem;
-  padding: 0.5rem;
-}
 
 li{
   margin: 0;
@@ -125,12 +208,12 @@ li{
   padding: 0 0.5rem;
   overflow: hidden;
   list-style: none;
-  color: white;
+  color: black;
 }
 
 .deleteTodo{
   height: 100%;
   width: 3rem;
   border-radius: 0 .5rem .5rem 0;
-  background-color: transparent;
+  background-color: red;
 }

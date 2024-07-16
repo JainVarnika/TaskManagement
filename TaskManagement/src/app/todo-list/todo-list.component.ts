@@ -19,6 +19,7 @@ export class TodoListComponent implements OnInit, OnDestroy {
   descriptionField: string = '';
   dueDateField: Date |null= null;
   priorityField: 'low' | 'medium' | 'high' |null = null;
+  taskstatusField:'pending'|'inProgress' |'completed' | null=null; 
   allTodos$ = this.store.select(selectAllTodos);
   todos: Todo[] = [];
   todoSub: any;
@@ -32,22 +33,30 @@ export class TodoListComponent implements OnInit, OnDestroy {
   }
 
   addTodo() {
-    if (this.inputField === ''|| this.descriptionField === ''  || !this.priorityField) {
+    if (this.inputField === ''|| this.descriptionField === ''  || !this.priorityField ) {
       alert("Task, Description, Due Date, and Priority are required.");
       return;
     }
     const task = this.inputField;
     const description = this.descriptionField;
     // const dueDate = this.dueDateField ? this.dueDateField.toISOString() : '';
-    // const dueDate = this.dueDateField instanceof Date ? this.dueDateField.toISOString() : '';
     const dueDate = this.dueDateField; 
     const priority = this.priorityField;
+    const taskstatus=this.taskstatusField;
 
-    this.store.dispatch(addTodo({ task, description, dueDate, priority }));
+    this.store.dispatch(addTodo({ task, description, dueDate, priority ,taskstatus}));
     this.inputField = '';
     this.descriptionField = '';
     this.dueDateField = null;
     this.priorityField = 'low';
+    this.taskstatusField='pending';
+  }
+  // updateTaskStatus(todo: Todo) {
+  //   this.TodoService.updateTodoStatus(todo.id, todo.taskstatus);
+  // }
+  updateTaskStatus(id: string, status: 'pending' | 'inProgress' | 'completed' | null) {
+    this.TodoService.updateTodoStatus(id, status);
+    this.todos = this.TodoService.getTodos();
   }
 
   removeTodo(id: string) {

@@ -21,9 +21,9 @@ export const initialState: TodoState = {
 
 export const todoReducer = createReducer(
     initialState,
-    on(addTodo, (state, { task, description, dueDate, priority }) => ({
+    on(addTodo, (state, { task, description, dueDate, priority,taskstatus }) => ({
         ...state,
-        todos: [...state.todos, { id: Date.now().toString(), task, description, dueDate, priority, done: false }]
+        todos: [...state.todos, { id: Date.now().toString(), task, description, dueDate, priority, taskstatus,done: false }]
     })),
 
     on(removeTodo, (state, { id }) => ({
