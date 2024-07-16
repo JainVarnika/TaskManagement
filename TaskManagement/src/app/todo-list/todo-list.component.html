@@ -16,15 +16,15 @@
     <div class="divider"></div>
     <div id="list-body">
         <ul cdkDropList (cdkDropListDropped)="drop($event)">
-            <div *ngFor="let todo of allTodos$ | async" id="todo-item" cdkDrag>
+            <div *ngFor="let todo of allTodos$ | async" id="todo-item" >
                     <!-- <img src="assets/img/drag_icon.svg" id="dragBar" class="dragBar" cdkDragHandle> -->
                     <li>{{ todo.task }} - {{ todo.description }} - {{ todo.dueDate | date }} - {{ todo.priority }}   </li>
-                    <select id="todo-status"   [(ngModel)]="todo.taskstatus" (change)="updateTaskStatus(todo.id, todo.taskstatus)">
+                    <select id="todo-status" placeholder="Pending"  [(ngModel)]="todo.taskstatus" (change)="updateTaskStatus(todo.id, todo.taskstatus)">
                         <option value="pending">Pending</option>
                         <option value="inProgress">in Progress</option>
                         <option value="Completed">Completed</option>
                     </select>
-                <button id="editTodo"(click)="editTask(todo)">Edit</button>
+                <button id="updateTodoTask"(click)="editTask(todo)">Edit</button>
                     <button id="deleteTodo" class="deleteTodo" (click)="removeTodo(todo.id)">Delete</button>
                     
             </div>

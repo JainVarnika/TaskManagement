@@ -1,6 +1,8 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
+import { ChangeDetectorRef } from '@angular/core';
+
 import { Observable, Subscriber, Subscription } from 'rxjs';
 import { Todo ,TodoService} from '../services/todo-list.service';
 import { AppState } from '../state/app.state';
@@ -22,14 +24,17 @@ export class TodoListComponent implements OnInit, OnDestroy {
   taskstatusField:'pending'|'inProgress' |'completed' | null=null; 
   allTodos$ = this.store.select(selectAllTodos);
   todos: Todo[] = [];
-  todoSub: any;
+  todoSub:any;
 
-  constructor(private store: Store<AppState>, private TodoService: TodoService , private papa: Papa) {}
+  constructor(private store: Store<AppState>, private TodoService: TodoService , private papa: Papa,private cdr: ChangeDetectorRef) {}
 
 
   ngOnInit(): void {
     this.store.dispatch(loadTodos());
-    this.todoSub = this.allTodos$.subscribe(value => this.todos = [...value]);
+    this.todoSub = this.allTodos$.subscribe(value => {this.todos = [...value];
+    this.sortTodosByDueDate();
+    this.cdr.markForCheck(); 
+  });
   }
 
   addTodo() {
@@ -40,9 +45,10 @@ export class TodoListComponent implements OnInit, OnDestroy {
     const task = this.inputField;
     const description = this.descriptionField;
     // const dueDate = this.dueDateField ? this.dueDateField.toISOString() : '';
-    const dueDate = this.dueDateField; 
+    // const dueDate = this.dueDateField; 
+    const dueDate = this.dueDateField ? new Date(this.dueDateField) : null;
     const priority = this.priorityField;
-    const taskstatus=this.taskstatusField;
+    const taskstatus='pending';
 
     this.store.dispatch(addTodo({ task, description, dueDate, priority ,taskstatus}));
     this.inputField = '';
@@ -66,13 +72,14 @@ export class TodoListComponent implements OnInit, OnDestroy {
     this.store.dispatch(moveTodo({prevIndex: event.previousIndex, newIndex: event.currentIndex}))
   }
   
+ 
   editTask(todo: Todo): void {
     const updatedTask = prompt("Edit Todo:", todo.task);
     if (updatedTask !== null) {
-      this.store.dispatch(editTodo({ id: todo.id, updatedTask: updatedTask }));
+      this.store.dispatch(editTodo({ id: todo.id, updatedTask }));
     }
   }
- 
+
   
   exportToCSV(): void {
     const todos = this.todos.map(todo => ({
@@ -104,14 +111,18 @@ export class TodoListComponent implements OnInit, OnDestroy {
     a.click();
     window.URL.revokeObjectURL(url);
   }
+
   sortTodosByDueDate() {
     this.todos.sort((a, b) => {
+      if (!a.dueDate && !b.dueDate) return 0;
       if (!a.dueDate) return 1;
       if (!b.dueDate) return -1;
-      console.log("working");
       return new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime();
     });
+    console.log('After sorting:', this.todos);
+    this.cdr.detectChanges();
   }
+  
   ngOnDestroy(): void {
     this.todoSub.unsubscribe();
   }

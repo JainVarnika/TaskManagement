@@ -1,19 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import {
-  addTodo,
-  removeTodo,
-  loadTodos,
-  loadTodosSuccess,
-  moveTodo,
-} from './todo.actions';
+import {addTodo,removeTodo,loadTodos,loadTodosSuccess,moveTodo,} from './todo.actions';
 import { TodoService } from '../../services/todo-list.service';
 import { of, from } from 'rxjs';
-import {
-  map,
-  withLatestFrom,
-  tap,
-} from 'rxjs/operators';
+import {map,withLatestFrom,tap,} from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { selectAllTodos } from './todo.selectors';
 import { AppState } from '../app.state';

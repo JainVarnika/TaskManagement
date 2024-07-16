@@ -23,7 +23,7 @@ export class TodoService {
       localStorage.setItem("todos", JSON.stringify(todos));
   }
   
-  updateTodoTask(id: string, updatedTask: string): void {
+  updateTodoTask(id: string, updatedTask: string):  Todo[]{
     let todos = this.getTodos();
     todos = todos.map(todo => {
       if (todo.id === id) {
@@ -33,7 +33,7 @@ export class TodoService {
       }
     });
     this.saveTodos(todos);
-    // return todos;
+    return todos;
   }
   updateTodoStatus(id: string, status: 'pending' | 'inProgress' | 'completed' | null): void {
     let todos = this.getTodos();
