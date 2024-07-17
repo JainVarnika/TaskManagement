@@ -24,7 +24,7 @@ export class TodoListComponent implements OnInit, OnDestroy {
   taskstatusField:'pending'|'inProgress' |'completed' | null=null; 
   allTodos$ = this.store.select(selectAllTodos);
   todos: Todo[] = [];
-  todoSub:any;
+  todoSub:Subscription | undefined;
 
   constructor(private store: Store<AppState>, private TodoService: TodoService , private papa: Papa,private cdr: ChangeDetectorRef) {}
 
@@ -33,6 +33,7 @@ export class TodoListComponent implements OnInit, OnDestroy {
     this.store.dispatch(loadTodos());
     this.todoSub = this.allTodos$.subscribe(value => {this.todos = [...value];
     this.sortTodosByDueDate();
+    console.log(this.allTodos$);
     this.cdr.markForCheck(); 
   });
   }
@@ -98,8 +99,7 @@ export class TodoListComponent implements OnInit, OnDestroy {
         todo.task,
         todo.description,
         todo.dueDate,
-        todo.priority,
-        todo.done
+        todo.priority
       ])
     });
   
@@ -120,10 +120,11 @@ export class TodoListComponent implements OnInit, OnDestroy {
       return new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime();
     });
     console.log('After sorting:', this.todos);
+    console.log(this.allTodos$);
     this.cdr.detectChanges();
   }
   
   ngOnDestroy(): void {
-    this.todoSub.unsubscribe();
+    // this.todoSub.unsubscribe();
   }
 }

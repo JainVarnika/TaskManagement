@@ -1,40 +1,131 @@
-ul{
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-// .divider{
-//     margin: 0 1rem;
-//     // border-top: .125rem solid rgb(255, 255, 255);
-//     border-top: .125rem solid black;
-
-//     margin: 1rem 0;
-//     box-shadow: 0 0 20px 1px rgb(255, 255, 255);
+// ul{
+//     list-style: none;
+//     padding: 0;
+//     margin: 0;
+//     display: flex;
+//     flex-direction: column;
+//     gap: 0.5rem;
 // }
-
-#headline{
-    padding-top: 1vh;
-    color: black;
-    font-size: 50px;
-    margin-top: 40px;
-    margin-bottom: 20px;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+.poppins-thin {
     font-family: "Poppins", sans-serif;
-}
+    font-weight: 100;
+    font-style: normal;
+  }
+  
+  .poppins-extralight {
+    font-family: "Poppins", sans-serif;
+    font-weight: 200;
+    font-style: normal;
+  }
+  
+  .poppins-light {
+    font-family: "Poppins", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+  }
+  
+  .poppins-regular {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  .poppins-medium {
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+  }
+  
+  .poppins-semibold {
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+  }
+  
+  .poppins-bold {
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+  }
+  
+  .poppins-extrabold {
+    font-family: "Poppins", sans-serif;
+    font-weight: 800;
+    font-style: normal;
+  }
+  
+  .poppins-black {
+    font-family: "Poppins", sans-serif;
+    font-weight: 900;
+    font-style: normal;
+  }
+  
+  .poppins-thin-italic {
+    font-family: "Poppins", sans-serif;
+    font-weight: 100;
+    font-style: italic;
+  }
+  
+  .poppins-extralight-italic {
+    font-family: "Poppins", sans-serif;
+    font-weight: 200;
+    font-style: italic;
+  }
+  
+  .poppins-light-italic {
+    font-family: "Poppins", sans-serif;
+    font-weight: 300;
+    font-style: italic;
+  }
+  
+  .poppins-regular-italic {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: italic;
+  }
+  
+  .poppins-medium-italic {
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: italic;
+  }
+  
+  .poppins-semibold-italic {
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-style: italic;
+  }
+  
+  .poppins-bold-italic {
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-style: italic;
+  }
+  
+  .poppins-extrabold-italic {
+    font-family: "Poppins", sans-serif;
+    font-weight: 800;
+    font-style: italic;
+  }
+  
+  .poppins-black-italic {
+    font-family: "Poppins", sans-serif;
+    font-weight: 900;
+    font-style: italic;
+  }
+  
 
-#list-container{
-    width: 90%;
-    max-width: 10000px;
-    height: 70%;
-    display: flex;
-    margin-top: 20px;
-    flex-direction: column;
-    border-radius: 0.25rem;
-    background-color: white
-}
+// #list-container{
+//     width: 90%;
+//     max-width: 10000px;
+//     height: 70%;
+//     display: flex;
+//     margin-top: 20px;
+//     flex-direction: column;
+//     border-radius: 0.25rem;
+//     background-color: white
+// }
 
 #todo-input{
     height: 2.5rem;
@@ -49,14 +140,7 @@ ul{
     outline: none;
     border-color: #0077ff;
 }
-#todo-description{
-    height: 2.5rem;
-    border: 1px solid black;
-    flex: 1;
-    border-radius: .25rem .25rem .25rem .25rem;
-    padding: 0 1rem;
-    font-size: 1rem;
-}
+
 
 #todo-description:focus-visible, #todo-description:hover{
     outline: none;
@@ -88,114 +172,192 @@ ul{
     outline: none;
     border-color: #0077ff;
 }
-#add-todo{
-    background-color: lightgray;
-    width: 2.5rem;
-    height: 2.3rem;
-    border-radius: 0 .25rem .25rem 0;
-    border: 4px solid lightgray;
-    box-sizing: content-box;
-    padding: 0;
-}
 
-#add-todo:hover{
-    border-color: #0077ff;
-    background-color: #0077ff;
-    color: white;
-}
 
-#list-head{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 0.5rem;
-    margin-bottom: 1rem;
-    padding: 0 1rem;
-}
-
-#list-body{
-    overflow: auto;
-    height: auto;
-    padding: 1rem 0.5rem 1rem  0.5rem;
-}
-
-#todo-item{
-    display: flex;
-    align-items: center;
-    // justify-content: space-between;
-    background-color: rgba(255, 255, 255, 0.192);
-    font-size: 1.8rem;
-    border-radius: .5rem;
-    border: 1px solid rgba(255,255,255,0.4);
-    border-right: 1px solid rgba(255,255,255,0.2);
-    border-bottom: 1px solid rgba(255,255,255,0.2);
-    box-shadow: #00000030 0px 0px 4px 1px;
-    padding-right: 0.5rem;
-}
 
 #todo-item:hover{
     background-color: rgba(255, 255, 255, 0.33);
 }
 
-#noTodosText{
-    text-align: center;
-    font-size: 1.4rem;
-    font-weight: 500;
-    color: white;
+
+
+
+#headline{
+    // padding-top: 1vh;
+    color: black;
+    font-size: 50px;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    // font-family: "Poppins", sans-serif;
+    font-family: "Poppins", sans-serif;
+    background-color: white;
+    border: 1px solid white;
+    border-radius: 0.5rem;
+    padding: 0 30px;
 }
 
-#todo-item li{
-    margin: 0;
+#list-container {
+    width: 85%;
+    height: 70%;
+    margin: auto;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Head styles */
+  #list-head {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  #todo-input,
+  #todo-description,
+  #todo-due-date,
+  #todo-priority {
+    margin-right: 10px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    width: 295px;
+  }
+  
+  #add-todo {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  #add-todo:hover {
+    background-color: #45a049;
+  }
+  
+  /* Body styles */
+  #list-body {
+    margin-bottom: 20px;
+  }
+  
+  #todo-item {
+    margin-bottom: 10px;
+    margin-left: -30px;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    display: flex;
+    font-size: 23px;
+    flex-wrap: wrap; 
+    justify-content: space-between;
+    align-items: center;
+  }
+   #todo-item  .task-desc,   #todo-item  .task-pri,#todo-item  .task-date{
+    margin-top: 10px;
     flex: 1;
-    padding: 0 0.5rem;
-    overflow: hidden;
-    color: black;
-}
-
-#deleteTodo{
-    height: 3rem;
-    width:3rem;
-    border-radius: 0.5rem .5rem .5rem 0.5rem;
-    background-color: red;
-    color: white;
-    margin-right: -0.5rem; /* Move the buttons to the left */
-    padding-left: 0.3rem;
-    padding-right: 4.4rem;
-    margin-left:0.5rem;
-
-}
-
-#deleteTodo:hover{
-    color: black;
-}
-#editTodo{
-    height: 3rem;
-    width:3rem;
+    overflow-wrap: break-word;
+    margin-left: -490px;
+    // margin-right: -100px;
+  }
+  #todo-item .task-pri{
+    // margin-top: 10px;
+    padding-left: 30px;
+    // margin-left: 10px;
+    color: red;
+  }
+  #todo-status {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+  #todo-item .task-title {
+    margin-top: 10px;
+    flex: 1;
+    font-weight: bold; 
+    overflow-wrap: break-word;
+    // color: #dc5656;
+  }
+  
+  #editTodo{
+    
     background-color: rgb(59, 128, 207);
-    border-radius: 0.5rem .5rem .5rem 0.5rem;
     color: white;
-    margin-right: -0.5rem; /* Move the buttons to the left */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    width: 4rem;
+    height: 2.2rem;
+    // margin-right: -0.5rem; 
     padding-left: 0.3rem;
-    padding-right: 3rem;
+    padding-right: 0.3rem;
     margin-left:0.5rem;
-
-}
-
-#editTodo:hover{
+  }
+  #deleteTodo {
+    // margin-top: 10px;
+    padding: 8px 12px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    width: 3.4rem;
+    // margin-right: -0.5rem; 
+    padding-left: 0.3rem;
+    padding-right: 0.3rem;
+    margin-left:0.5rem;
+  }
+  
+  #editTodo:hover,
+  #deleteTodo:hover {
+    background-color: white;
     color: black;
-}
+    border:1px solid gray;
+    
+  }
+  #sort-todo,#export-todo{
+    border-radius: 4px;
+    border:1px solid gray;
+    color: #45a049;
+    margin-right: 10px;
 
-@media (max-width: 700px) {
-    #headline{
-        padding-top: 1vh;
+  }
+  #sort-todo:hover,
+  #export-todo:hover{
+    background-color: #2f7bd3;
+    color: white;
+    border:1px solid gray;
+  }
+ 
+  @media screen and (max-width: 768px) {
+    #todo-item {
+      flex-direction: column; 
     }
-
-    #list-container{
-        width: 90%;
-        height: 85%;
+  
+    #editTodo,
+    #deleteTodo {
+      margin-top: 0; 
+      margin-left: 0; 
     }
-
-    #todo-input{
-        width: 5rem;
+  
+    #editTodo {
+      margin-bottom: 10px; 
     }
-}
+  
+    #todo-input,
+    #todo-description,
+    #todo-due-date,
+    #todo-priority {
+      width: 100%; 
+      margin-right: 0;
+      margin-bottom: 10px; 
+    }
+  }
+  

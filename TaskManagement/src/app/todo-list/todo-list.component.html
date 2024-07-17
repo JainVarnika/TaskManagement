@@ -18,13 +18,15 @@
         <ul cdkDropList (cdkDropListDropped)="drop($event)">
             <div *ngFor="let todo of allTodos$ | async" id="todo-item" >
                     <!-- <img src="assets/img/drag_icon.svg" id="dragBar" class="dragBar" cdkDragHandle> -->
-                    <li>{{ todo.task }} - {{ todo.description }} - {{ todo.dueDate | date }} - {{ todo.priority }}   </li>
+                    <p  class="task-title">{{ todo.task }} </p><p class="task-desc">{{ todo.description }}</p><p class="task-date">{{ todo.dueDate | date }}</p> <p class="task-pri"> {{ todo.priority }}   </p>
+                    <!-- <h1  class="task-title">{{ todo.task }} </h1>{{ todo.description }}{{ todo.dueDate | date }}{{ todo.priority }}    -->
+
                     <select id="todo-status" placeholder="Pending"  [(ngModel)]="todo.taskstatus" (change)="updateTaskStatus(todo.id, todo.taskstatus)">
                         <option value="pending">Pending</option>
                         <option value="inProgress">in Progress</option>
                         <option value="Completed">Completed</option>
                     </select>
-                <button id="updateTodoTask"(click)="editTask(todo)">Edit</button>
+                <button id="editTodo"(click)="editTask(todo)">Edit</button>
                     <button id="deleteTodo" class="deleteTodo" (click)="removeTodo(todo.id)">Delete</button>
                     
             </div>
