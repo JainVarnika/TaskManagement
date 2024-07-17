@@ -116,16 +116,6 @@
   }
   
 
-// #list-container{
-//     width: 90%;
-//     max-width: 10000px;
-//     height: 70%;
-//     display: flex;
-//     margin-top: 20px;
-//     flex-direction: column;
-//     border-radius: 0.25rem;
-//     background-color: white
-// }
 
 #todo-input{
     height: 2.5rem;
@@ -188,7 +178,7 @@
     font-size: 50px;
     margin-top: 40px;
     margin-bottom: 20px;
-    // font-family: "Poppins", sans-serif;
+
     font-family: "Poppins", sans-serif;
     background-color: white;
     border: 1px solid white;
@@ -204,6 +194,7 @@
     background-color: #f0f0f0;
     border-radius: 12px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    
   }
   
   /* Head styles */
@@ -242,6 +233,9 @@
   /* Body styles */
   #list-body {
     margin-bottom: 20px;
+    overflow-y: scroll;
+    height:80%;
+    
   }
   
   #todo-item {
@@ -256,17 +250,25 @@
     flex-wrap: wrap; 
     justify-content: space-between;
     align-items: center;
+    
   }
-   #todo-item  .task-desc,   #todo-item  .task-pri,#todo-item  .task-date{
+ li {
     margin-top: 10px;
-    flex: 1;
+    // flex: 1;
     overflow-wrap: break-word;
-    margin-left: -490px;
-    // margin-right: -100px;
+    padding: 10px;
+    // width: 40%;
+    display: flex;
+    // position: relative;
+    flex-direction: row;
+    justify-content: space-between;
+  //   margin-left: -490px;
+  //   // margin-right: -100px;
   }
+ 
   #todo-item .task-pri{
     // margin-top: 10px;
-    padding-left: 30px;
+    // padding-left: 30px;
     // margin-left: 10px;
     color: red;
   }
@@ -275,12 +277,17 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 14px;
+    background-color: grey;
+  }
+  #todo-status:hover{
+    background-color: white;
+    columns: black;
   }
   #todo-item .task-title {
-    margin-top: 10px;
-    flex: 1;
+    // margin-top: 10px;
+    // flex: 1;
     font-weight: bold; 
-    overflow-wrap: break-word;
+    // overflow-wrap: break-word;
     // color: #dc5656;
   }
   
@@ -322,18 +329,22 @@
     border:1px solid gray;
     
   }
-  #sort-todo,#export-todo{
+  #sort-todo,#sortPriority-todo,#export-todo{
     border-radius: 4px;
     border:1px solid gray;
     color: #45a049;
     margin-right: 10px;
+    position: sticky;
+    z-index: 10;
 
   }
   #sort-todo:hover,
+  #sortPriority-todo:hover,
   #export-todo:hover{
     background-color: #2f7bd3;
     color: white;
     border:1px solid gray;
+    
   }
  
   @media screen and (max-width: 768px) {

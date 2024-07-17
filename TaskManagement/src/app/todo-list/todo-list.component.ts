@@ -15,6 +15,7 @@ import { Papa } from 'ngx-papaparse';
   selector: 'app-todo-list',
   templateUrl: './todo-list.component.html',
   styleUrls: ['./todo-list.component.scss'],
+
 })
 export class TodoListComponent implements OnInit, OnDestroy {
   inputField: string = '';
@@ -32,7 +33,6 @@ export class TodoListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.store.dispatch(loadTodos());
     this.todoSub = this.allTodos$.subscribe(value => {this.todos = [...value];
-    this.sortTodosByDueDate();
     console.log(this.allTodos$);
     this.cdr.markForCheck(); 
   });
@@ -112,6 +112,8 @@ export class TodoListComponent implements OnInit, OnDestroy {
     window.URL.revokeObjectURL(url);
   }
 
+
+  
   sortTodosByDueDate() {
     this.todos.sort((a, b) => {
       if (!a.dueDate && !b.dueDate) return 0;
@@ -119,9 +121,44 @@ export class TodoListComponent implements OnInit, OnDestroy {
       if (!b.dueDate) return -1;
       return new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime();
     });
+  
+    // Reassign the sorted array back to trigger change detection
+    this.todos = [...this.todos];
+  
     console.log('After sorting:', this.todos);
-    console.log(this.allTodos$);
-    this.cdr.detectChanges();
+  }
+  
+  // sortTodosByPriority() {
+  //   this.todos.sort((a, b) => {
+  //     // Convert priority to a numerical value for sorting: low = 0, medium = 1, high = 2
+  //     const priorityOrder = { low: 0, medium: 1, high: 2 };
+  //     return priorityOrder[a.priority] - priorityOrder[b.priority];
+  //   });
+  //   this.todos = [...this.todos];
+  //   console.log('After sorting:', this.todos);
+  // }
+  sortTodosByPriority() {
+    // Define the priority order
+    const priorityOrder = { 'low': 1, 'medium': 2, 'high': 3 };
+  
+    // Sort todos array based on priority order
+    this.todos.sort((a, b) => {
+      const priorityA = priorityOrder[a.priority];
+      const priorityB = priorityOrder[b.priority];
+  
+      // Compare priorities
+      if (priorityA < priorityB) {
+        return -1;
+      }
+      if (priorityA > priorityB) {
+        return 1;
+      }
+      // If priorities are equal, maintain existing order
+      return 0;
+    });
+  
+    // Log the sorted todos to verify sorting
+    console.log('Sorted Todos:', this.todos);
   }
   
   ngOnDestroy(): void {

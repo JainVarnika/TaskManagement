@@ -5,10 +5,11 @@
         <input id="todo-input" type="text" placeholder="New Todo..." [(ngModel)]="inputField" (keydown.enter)="addTodo()">
         <input id="todo-description" type="text" placeholder="Description..." [(ngModel)]="descriptionField">
         <input id="todo-due-date" type="date" [(ngModel)]="dueDateField">
-        <select id="todo-priority"  [(ngModel)]="priorityField">
-            <option value="low">Low</option>
-            <option value="medium">Medium</option>
-            <option value="high">High</option>
+        <select id="todo-priority"  placeholder="Priority"[(ngModel)]="priorityField">
+            <option value="Low" disabled selected hidden>Select Priority</option>
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
         </select> 
         
         <button (click)="addTodo()" id="add-todo">+</button>
@@ -16,10 +17,10 @@
     <div class="divider"></div>
     <div id="list-body">
         <ul cdkDropList (cdkDropListDropped)="drop($event)">
-            <div *ngFor="let todo of allTodos$ | async" id="todo-item" >
-                    <!-- <img src="assets/img/drag_icon.svg" id="dragBar" class="dragBar" cdkDragHandle> -->
-                    <p  class="task-title">{{ todo.task }} </p><p class="task-desc">{{ todo.description }}</p><p class="task-date">{{ todo.dueDate | date }}</p> <p class="task-pri"> {{ todo.priority }}   </p>
+            <div *ngFor="let todo of todos " id="todo-item" >
+                    <li><div  class="task-title">{{ todo.task }} </div><div class="task-desc">{{ todo.description }}</div><div class="task-date">{{ todo.dueDate | date }}</div> <p class="task-pri"> {{ todo.priority }}   </p></li>
                     <!-- <h1  class="task-title">{{ todo.task }} </h1>{{ todo.description }}{{ todo.dueDate | date }}{{ todo.priority }}    -->
+                    <!-- <li>{{ todo.task }}{{ todo.description }}{{ todo.dueDate | date }}{{ todo.priority }}  </li> -->
 
                     <select id="todo-status" placeholder="Pending"  [(ngModel)]="todo.taskstatus" (change)="updateTaskStatus(todo.id, todo.taskstatus)">
                         <option value="pending">Pending</option>
@@ -35,6 +36,7 @@
         
     </div>
     <button (click)="sortTodosByDueDate()" id="sort-todo">Sort by Due Date</button>
+    <button (click)="sortTodosByPriority()" id="sortPriority-todo">Sort by Priority</button>
     <button (click)="exportToCSV()" id="export-todo">Export to CSV</button>
     <div class="divider"  *ngIf="todos.length > 0"></div>
 </div>

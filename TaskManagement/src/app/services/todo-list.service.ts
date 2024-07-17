@@ -4,7 +4,7 @@ export interface Todo {
     task: string;
     description: string;
     dueDate: Date | null;
-    priority: 'low' | 'medium' | 'high';
+    priority: 'low' | 'medium' | 'high' ;
     taskstatus:'pending'|'inProgress' |'completed'|null;
     done: boolean;
     editing?: boolean; 
