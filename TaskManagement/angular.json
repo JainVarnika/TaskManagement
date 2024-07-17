@@ -16,6 +16,7 @@
             "outputPath": "dist/task-management",
             "index": "src/index.html",
             "browser": "src/main.ts",
+             "baseHref": "/TaskManagement/",
             "polyfills": [
               "zone.js"
             ],
