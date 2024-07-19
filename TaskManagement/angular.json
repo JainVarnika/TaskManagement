@@ -16,7 +16,7 @@
             "outputPath": "dist/task-management",
             "index": "src/index.html",
             "browser": "src/main.ts",
-             "baseHref": "/TaskManagement/",
+          
             "polyfills": [
               "zone.js"
             ],
@@ -45,15 +45,12 @@
                   "maximumError": "4kb"
                 }
               ],
-              "optimization": true,
-            "outputHashing": "all",
-            "sourceMap": false,
-            "extractCss": true,
-            "namedChunks": false,
-            "aot": true,
-            "extractLicenses": true,
-            "vendorChunk": false,
-            "buildOptimizer": true
+              
+            "outputHashing": "all"
+            
+            
+            
+            
             },
             "development": {
               "optimization": false,

@@ -26,7 +26,6 @@ export class TodoEffects {
     )
   );
 
-  // Run this code when the addTodo or removeTodo action is dispatched
   saveTodos$ = createEffect(
     () =>
       this.actions$.pipe(
@@ -34,7 +33,6 @@ export class TodoEffects {
         withLatestFrom(this.store.select(selectAllTodos)),
         tap(([action, todos]) => this.todoService.saveTodos(todos))
       ),
-    // Most effects dispatch another action, but this one is just a "fire and forget" effect
     { dispatch: false }
   );
 }

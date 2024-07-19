@@ -24,11 +24,12 @@ export class TodoListComponent implements OnInit, OnDestroy {
   priorityField: 'low' | 'medium' | 'high' |null = null;
   taskstatusField:'pending'|'inProgress' |'completed' | null=null; 
   allTodos$ = this.store.select(selectAllTodos);
+ 
   todos: Todo[] = [];
   todoSub:Subscription | undefined;
 
   constructor(private store: Store<AppState>, private TodoService: TodoService , private papa: Papa,private cdr: ChangeDetectorRef) {}
-
+  
 
   ngOnInit(): void {
     this.store.dispatch(loadTodos());
@@ -87,9 +88,9 @@ export class TodoListComponent implements OnInit, OnDestroy {
       id: todo.id,
       task: todo.task,
       description: todo.description,
-      dueDate: todo.dueDate ? new Date(todo.dueDate).toISOString() : '', // Handle null or undefined dueDate
+      dueDate: todo.dueDate ? new Date(todo.dueDate).toISOString() : '', 
       priority: todo.priority,
-      done: todo.done.toString() // Convert boolean to string
+      done: todo.done.toString() 
     }));
   
     const csv = this.papa.unparse({
@@ -122,43 +123,63 @@ export class TodoListComponent implements OnInit, OnDestroy {
       return new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime();
     });
   
-    // Reassign the sorted array back to trigger change detection
     this.todos = [...this.todos];
   
     console.log('After sorting:', this.todos);
   }
   
-  // sortTodosByPriority() {
-  //   this.todos.sort((a, b) => {
-  //     // Convert priority to a numerical value for sorting: low = 0, medium = 1, high = 2
-  //     const priorityOrder = { low: 0, medium: 1, high: 2 };
-  //     return priorityOrder[a.priority] - priorityOrder[b.priority];
-  //   });
-  //   this.todos = [...this.todos];
-  //   console.log('After sorting:', this.todos);
-  // }
-  sortTodosByPriority() {
-    // Define the priority order
-    const priorityOrder = { 'low': 1, 'medium': 2, 'high': 3 };
+ 
+ 
   
-    // Sort todos array based on priority order
+  sortTodosByIncreasingPriority() {
+    if (!this.todos || !Array.isArray(this.todos)) {
+      console.error("todos is not an array or is undefined.");
+      return;
+    }
+  
+    const priorityOrder: { [key: string]: number } = { 'low': 1, 'medium': 2, 'high': 3 };
+
     this.todos.sort((a, b) => {
-      const priorityA = priorityOrder[a.priority];
-      const priorityB = priorityOrder[b.priority];
+      const priorityA = priorityOrder[a.priority.toLowerCase() as keyof typeof priorityOrder];
+      const priorityB = priorityOrder[b.priority.toLowerCase() as keyof typeof priorityOrder];
   
-      // Compare priorities
-      if (priorityA < priorityB) {
-        return -1;
-      }
-      if (priorityA > priorityB) {
-        return 1;
-      }
-      // If priorities are equal, maintain existing order
-      return 0;
+      return priorityA - priorityB;
     });
   
-    // Log the sorted todos to verify sorting
-    console.log('Sorted Todos:', this.todos);
+    console.log("Todos sorted:", this.todos);
+  }
+
+  onSortChange(event: Event): void {
+    const target = event.target as HTMLSelectElement;
+    const value = target.value;
+
+    switch (value) {
+      case 'dueDate':
+        this.sortTodosByDueDate();
+        break;
+      case 'increasingPriority':
+        this.sortTodosByIncreasingPriority();
+        break;
+      case 'decreasingPriority':
+        this.sortTodosByDecreasingPriority();
+        break;
+    }
+  }
+  
+  sortTodosByDecreasingPriority() {
+    if (!this.todos || !Array.isArray(this.todos)) {
+      console.error("todos is not an array or is undefined.");
+      return;
+    }
+  
+    const priorityOrder: { [key: string]: number } = { 'low': 1, 'medium': 2, 'high': 3 };
+      this.todos.sort((a, b) => {
+      const priorityA = priorityOrder[a.priority.toLowerCase() as keyof typeof priorityOrder];
+      const priorityB = priorityOrder[b.priority.toLowerCase() as keyof typeof priorityOrder];
+      return priorityB - priorityA;
+    });
+  
+    console.log("Todos sorted by decreasing priority:", this.todos);
   }
   
   ngOnDestroy(): void {
