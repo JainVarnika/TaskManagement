@@ -7,6 +7,7 @@
         <input id="todo-due-date" type="date" [(ngModel)]="dueDateField">
         
         <select id="todo-priority"  [(ngModel)]="priorityField">
+            <option value="">Choose Priority</option>
             <option value="Low">Low</option>
             <option value="Medium">Medium</option>
             <option value="High">High</option>
@@ -35,7 +36,8 @@
         
     </div>
     
-        <select id="sortOptions" id ="sort-dropdown" (change)="onSortChange($event)">
+        <select  id ="sort-dropdown" (change)="onSortChange($event)">
+            <option value="">Sort</option>
           <option value="dueDate">Due Date</option>
           <option value="increasingPriority">Increasing Priority</option>
           <option value="decreasingPriority">Decreasing Priority</option>
